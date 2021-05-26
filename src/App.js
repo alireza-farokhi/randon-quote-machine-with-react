@@ -9,8 +9,6 @@ import { Grid, withStyles } from "@material-ui/core";
 
 const styles = {
   container:{
-    backgroundColor: '#333',
-    color: '#fff',
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -70,7 +68,7 @@ class App extends Component {
 
     return (
       <Grid className={this.props.classes.container} id="quote-box" justify="center" container>
-        <Grid item>
+        <Grid xs={11} lg={8} item>
           <QuoteMachine selectedQuote={this.selectedQuote} assignQuoteIndex={this.assignQuoteIndex} />
         </Grid>
       </Grid >
