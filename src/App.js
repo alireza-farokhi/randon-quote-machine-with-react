@@ -1,9 +1,22 @@
 import React, { Component } from "react";
 
-import './App.css';
 
-import Button from "./components/Button";
+import "typeface-roboto";
 import _ from "lodash";
+import QuoteMachine from "./components/QuoteMachine";
+import { Grid, withStyles } from "@material-ui/core";
+
+
+const styles = {
+  container:{
+    backgroundColor: '#333',
+    color: '#fff',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+  }
+}
 
 class App extends Component {
 
@@ -16,6 +29,7 @@ class App extends Component {
     };
 
     this.selectQuoteIndex = this.selectQuoteIndex.bind(this);
+    this.assignQuoteIndex = this.assignQuoteIndex.bind(this);
   };
 
   componentDidMount() {
@@ -24,12 +38,7 @@ class App extends Component {
       .then(
         quotes => this.setState({
           quotes,
-        },() => {
-          
-          this.setState({
-            selectedQuoteIndex: this.selectQuoteIndex()
-          })
-        })
+        }, this.assignQuoteIndex)
       );
 
   }
@@ -42,27 +51,31 @@ class App extends Component {
     return _.random(0, this.state.quotes.length - 1);
   }
 
-  get selectedQuote(){
-    if(!this.state.quotes.length || !Number.isInteger(this.state.selectedQuoteIndex)){
+  get selectedQuote() {
+    if (!this.state.quotes.length || !Number.isInteger(this.state.selectedQuoteIndex)) {
       return null;
     }
 
     return this.state.quotes[this.state.selectedQuoteIndex];
   }
 
-  nextQuoteClickHandler = () => {
-
+  assignQuoteIndex() {
+    this.setState({
+      selectedQuoteIndex: this.selectQuoteIndex()
+    });
   }
 
 
   render() {
-    console.log(this.selectedQuote)
+
     return (
-      <div className="App" id="quote-box">
-        <Button buttonName="Next Quote" clickHandler={this.nextQuoteClickHandler} />
-      </div>
+      <Grid className={this.props.classes.container} id="quote-box" justify="center" container>
+        <Grid item>
+          <QuoteMachine selectedQuote={this.selectedQuote} assignQuoteIndex={this.assignQuoteIndex} />
+        </Grid>
+      </Grid >
     );
   };
 };
 
-export default App;
+export default withStyles(styles)(App);
