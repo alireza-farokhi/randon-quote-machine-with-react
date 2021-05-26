@@ -1,6 +1,6 @@
 
-const Button = ({buttonName}) => (
-    <button>{buttonName}</button>
+const Button = ({buttonName,clickHandler}) => (
+    <button onClick={clickHandler}>{buttonName}</button>
 );
 
 export default Button;
