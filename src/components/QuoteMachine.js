@@ -24,7 +24,7 @@ const QuoteMachine = ({ selectedQuote, assignQuoteIndex }) => {
                 <Button size="small" onClick={assignQuoteIndex} id="new-quote">
                     Next Quote
                 </Button>
-                <IconButton id="new-quote"
+                <IconButton
                     target="_blank"
                     href={`https://twitter.com/intent/tweet?text=${selectedQuote ? selectedQuote.quote : ''}`}
                     id="tweet-quote"
